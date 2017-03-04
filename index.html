@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Drupal development workflow using Drupal VM</title>
+
+		<meta name="description" content="Drupal development workflow using Drupal VM ">
+		<meta name="author" content="Suresh Kumara Sandeep Reddy">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Drupal development workflow using Drupal VM</h1>
+					<p>
+ 					        <small><a href="https://www.drupal.org/u/suresh-kumara">Suresh Kumara</a> / <a href="http://twitter.com/kumara_suresh25">@kumara_suresh25</a></small>
+                            <small><a href="https://www.drupal.org/u/suresh-kumara">Sandeep Reddy</a> / <a href="http://twitter.com/kumara_suresh25">@kumara_suresh25</a></small> 					        
+					</p>
+	<p>
+ 					        <medium><a href="http://azrisolutions.com/"> Azri Solutions </a></medium>
+					</p>
+				</section>
+				<section>
+					<!-- <img src="assets/myself.jpg" height="600"> -->
+				</section>
+
+				<section>
+					<h2>Suresh Kumara</h2>
+					<ul>
+						<li>Graduated from R.L.Jallapa Institue Of Technology</li>
+						<li>From Bangalore</li>
+						<li>Seniour Drupal Developer at Azri Solutions</li>
+						<li>Codeigniter, Magento, Symfony Developer</li>
+						<li>Drupal since 2014</li>
+						<li>Cricket, Badmitton Addict</li>
+					</ul>
+					<aside class="notes">
+						 speaker notes window (hit 's' on your keyboard).
+					</aside>
+
+				</section>
+				<section>
+					<h2>Sandeep Reddy</h2>
+					<ul>
+						<li>Graduated from R.L.Jallapa Institue Of Technology</li>
+						<li>From Hyderabad</li>
+						<li>Technical architect at Azri Solutions</li>
+						<li>Cake php, Magento, Symfony Developer</li>
+						<li>Drupal since 2016</li>
+						<li>Cricket, Badmitton Addict</li>
+					</ul>
+					<aside class="notes">
+						 speaker notes window (hit 's' on your keyboard).
+					</aside>
+
+				</section>
+
+				<section>
+				 <img  src="./assets/download.png">
+					<!-- <h2>Sandeep Reddy</h2> 
+					<ul>
+						<li>Graduated from R.L.Jallapa Institue Of Technology</li>
+						<li>From Hyderabad</li>
+						<li>Technical architect at Azri Solutions</li>
+						<li>Cake php, Magento, Symfony Developer</li>
+						<li>Drupal since 2016</li>
+						<li>Cricket, Badmitton Addict</li>
+					</ul>
+					<aside class="notes">
+						 speaker notes window (hit 's' on your keyboard).
+					</aside>
+                    -->
+				</section>
+
+				<section>
+					<h2>Overview</h2>
+					<ul>
+					  <li class="fragment">Virtualization</li>
+					  <li class="fragment">What is Vagrant And Its Advantages.</li>
+					  <li class="fragment">What is Ansible?</li>
+					  <li class="fragment">What is Drupal VM?</li>
+					  <li class="fragment">People behind Drupal VM.</li>
+					  <li class="fragment">Advantages of Drupal VM In Drupal Development.</li>
+					  <li class="fragment">Installing Drupal VM  and Drupal VM Config File.</li>
+					  <li class="fragment">Demo</li>
+					  <li class="fragment">Debugging Drupal instance installed in Drupal VM using PhpStorm (IDE).</li>
+					</ul>
+				</section>
+				<section>
+				<h2>What is virtualization</h2> 
+				<h3>Three providers</h3>
+				 <img  src="./assets/server_virtualization-traditional_virtual_architecture_desktop.jpg">
+					<!-- <h2>Sandeep Reddy</h2> 
+					<ul>
+						<li>Graduated from R.L.Jallapa Institue Of Technology</li>
+						<li>From Hyderabad</li>
+						<li>Technical architect at Azri Solutions</li>
+						<li>Cake php, Magento, Symfony Developer</li>
+						<li>Drupal since 2016</li>
+						<li>Cricket, Badmitton Addict</li>
+					</ul>
+					<aside class="notes">
+						 speaker notes window (hit 's' on your keyboard).
+					</aside>
+                    -->
+				</section>
+                <section>
+				<h2>Jeff Geerling (@geerlingguy)</h2> 
+				 <img  src="./assets/jeff-2016.jpg">
+					<ul>
+						<li>Maintainer of Drupal VM.</li>
+						<li>He is involved in many open source development communities like Drupal and Ansible.</li>
+						<li>He is also an author of Ansible for DevOps.</li>
+					</ul>
+				</section>
+				<!-- Example of nested vertical slides -->
+				<section>
+				        <section>
+					  <h2>What is Vagrant</h2>
+					  <ul>
+					    <li class="fragment">A command line utility installed on host machine  for managing the lifecycle of guest virtual machines.</li>
+					    <li class="fragment">Vagrant acts as a wrapper around a provider(ex VirtualBox).</li>
+					    <li class="fragment">Used to build complete development environments.</li>
+					    <li class="fragment">Key terms</li>
+					    <ul>
+					      <li class="fragment">Box</li>
+					      <li class="fragment">provider</li>				    
+					      <li class="fragment">Provisioner</li>
+					    </ul>
+					  </ul>
+					</section>
+					<section> 
+					  <h2>Advantages</h2>
+					  <ul>
+					    <li class="fragment">Supports a range of virtualization providers and provisioning frameworks for configuration management.</li>
+					    <li class="fragment">handling virtual machine is simple.</li>
+					  </ul>						
+					</section>
+				</section>
+				<section>
+				<h2>What is Ansible and How it works?</h2>
+					  <ul>
+					    <li class="fragment">Ansible is a configuration management and 
+provisioning tool runs against servers.</li>
+					    <li class="fragment">It ensures each machine is working with identical environment.</li>
+					  </ul>	
+				</section>
+				
+
+				<section>
+				<h2>What is Drupal VM?</h2>
+					  <ul>
+					    <li class="fragment">Drupal VM is a preconfigured virtual machine.</li>
+					    <li class="fragment">Drupal VM is introduced for local drupal development .</li>
+					    <li class="fragment">New method of developing drupal projects.</li>
+                        <li class="fragment">Drupal VM  is built on the top of Vagrant and Ansible.</li>
+					  </ul>	
+				</section>
+
+				<section>
+				<section>
+				<h2>What is Ansible and How it works?</h2>
+					  <ul>
+					    <li class="fragment">Ansible is a configuration management and 
+provisioning tool runs against servers.</li>
+					    <li class="fragment">It ensures each machine is working with identical environment.</li>
+					  </ul>	
+					  </section>
+<section>
+  <h2>Advantages</h2>
+					  <ul>
+					    <li class="fragment">Simplify and standardize yours and your team’s workflow.</li>
+					    <li class="fragment">VM config is portable, version-controllable.
+</li>
+					    <li class="fragment">The VM allows multiple sites per server.</li>
+					    <li class="fragment">It uses a pre-provisioned base box.</li>
+					    <li class="fragment">It is much faster to provision.</li>
+					    <li class="fragment">Easy to emulate different operating system.</li>
+					    <li class="fragment">Simple and readable YAML configurations.</li>
+					  </ul>	  
+</section>
+				</section>
+
+				<section>
+				<h2>Configuring and Installing Drupal VM.</h2>
+					  <ul>
+					    <li class="fragment">Drupal VM can be downloaded from <a href="https://www.drupalvm.com/">https://www.drupalvm.com/</a></li>
+					    <li class="fragment">Drupal VM comes with a default.config.yml which can be overwritten by config.yml, local.config.yml.</li>
+					    <li class="fragment"><b>vagrant up</b> will do the magic.</li>
+					    <li class="fragment"><b>vagrant provision</b> will reload all the changed config into the VM.</li>
+					    <li class="fragment"><b>vagrant ssh</b> will help us loggin into the VM.</li>
+					  </ul>	
+				</section>
+
+                <section>
+				<h2>Demo</h2>
+					<img src="">
+				</section>
+
+
+                <section>
+				<h2></h2>
+					<img src=""/>
+				</section>
+				
+
+                <section>
+				<h2>Optional packages available in Drupal VM</h2>
+					<img src=""/>
+				</section>
+
+<section>
+<h2>Debugging Drupal instance installed in Drupal VM using PhpStorm (IDE).</h2>
+
+</section>
+
+<section>
+<img src="./assets/3555810-baby-any-questions-meme.jpg"/>
+</section>
+<section>
+<h2>Image Credits</h2>
+<a href="https://www.teepublic.com/t-shirt/521845-shrug-it-works-on-my-machine-programmer-excuse-des">https://www.teepublic.com/t-shirt/521845-shrug-it-works-on-my-machine-programmer-excuse-des</a>
+<a href="http://searchservervirtualization.techtarget.com/definition/virtualization">
+http://searchservervirtualization.techtarget.com/definition/virtualization
+</a>
+</section>
+		
+			<section><h2>Thank You</h2></section>
+
+				
+				<section>
+					<h2>References</h2>
+					<ul>
+					  <li>Slides: <a href="http://bit.ly/d8-multilingual">http://bit.ly/d8-multilingual</a></li>
+  					  <li><a href="http://hojtsy.hu/multilingual-drupal8">Multilingual Drupal by Gabor Hojtsy (http://hojtsy.hu)</a></li>
+					  <li><a href="http://www.drupal8multilingual.org/">http://drupal8multilingual.org</a></li>
+					  <!--<li><a href="http://www.drupal8multilingual.org/workshop">Multilingual workshop from Drupalcon Amsterdam</a></li>
+					  <li><a href="https://amsterdam2014.drupal.org/session/multilingual-content-d8-highly-evolved-permutated-api">Multilingual content in D8 from Drupalcon Amsterdam</a></li> -->
+					</ul>
+				</section>
+
+
+			</div>
+
+		</div>
+    <footer class="azri-logo logo">
+      <a href="http://www.azrisolutions.com/"><img src="assets/azri-logo-white.png" alt="azri logo" /></a>
+    </footer>
+    <footer class="dcd-logo logo">
+      <a href="https://2017.drupalhyderabad.org/"><img src="assets/dch.png" alt="dch logo" /></a>
+    </footer>
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: false,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
